@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('article');
+  const tagSet = new Set<string>();
+  for (const a of articles) {
+    const tags = (a.data as { tags?: string[] }).tags ?? [];
+    for (const t of tags) tagSet.add(t);
+  }
+  return Array.from(tagSet).map((tag) => ({
+    params: { tag },
+    props: { tag },
+  }));
+}
+
+const { tag } = Astro.props;
+const articles = await getCollection('article');
+const filtered = articles
+  .filter((a) => ((a.data as { tags?: string[] }).tags ?? []).includes(tag))
+  .sort((a, b) => {
+    const da = (a.data as { date?: string }).date ?? '';
+    const db = (b.data as { date?: string }).date ?? '';
+    return db.localeCompare(da);
+  });
+---
+
+<BaseLayout title={`タグ: ${tag}`}>
+  <h2 style="margin-top: 0;">タグ: {tag}</h2>
+  <ul style="list-style: none; padding: 0;">
+    {filtered.map((article) => (
+      <li style="margin-bottom: 0.75rem;">
+        <a href={`/${article.slug}`}>{(article.data as { title?: string }).title ?? article.slug}</a>
+        {(article.data as { date?: string }).date && (
+          <span style="color: var(--color-muted); font-size: 0.9rem; margin-left: 0.5rem;">
+            {(article.data as { date?: string }).date}
+          </span>
+        )}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

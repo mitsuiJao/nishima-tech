@@ -1,0 +1,35 @@
+{
+  "site": {
+    "title": "homepage",
+    "description": "tech notes & projects"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "title": "Home",
+      "content": "pages/home.md"
+    },
+    {
+      "path": "/about",
+      "title": "About",
+      "content": "pages/about.md"
+    },
+    {
+      "path": "/articles",
+      "title": "Articles",
+      "content": "pages/articles.md",
+      "listCollection": "article"
+    },
+    {
+      "path": "/tags",
+      "title": "Tags",
+      "content": "pages/tags.md"
+    },
+    {
+      "path": "/[slug]",
+      "title": "",
+      "content": "article",
+      "dynamic": true
+    }
+  ]
+}

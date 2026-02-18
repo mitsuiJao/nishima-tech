@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarkdownContent from '../components/MarkdownContent.astro';
+import { getEntry, getCollection } from 'astro:content';
+
+const entry = await getEntry('pages', 'articles');
+if (!entry) throw new Error('pages/articles not found');
+
+const articles = await getCollection('article');
+const sorted = articles.sort((a, b) => {
+  const da = (a.data as { date?: string }).date ?? '';
+  const db = (b.data as { date?: string }).date ?? '';
+  return db.localeCompare(da);
+});
+---
+
+<BaseLayout title={entry.data.title}>
+  <MarkdownContent content={entry} />
+  <ul style="list-style: none; padding: 0; margin-top: 2rem;">
+    {sorted.map((article) => (
+      <li style="margin-bottom: 0.75rem;">
+        <a href={`/${article.slug}`}>{(article.data as { title?: string }).title ?? article.slug}</a>
+        {(article.data as { date?: string }).date && (
+          <span style="color: var(--color-muted); font-size: 0.9rem; margin-left: 0.5rem;">
+            {(article.data as { date?: string }).date}
+          </span>
+        )}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

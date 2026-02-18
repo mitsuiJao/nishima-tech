@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarkdownContent from '../../components/MarkdownContent.astro';
+import { getEntry, getCollection } from 'astro:content';
+
+const entry = await getEntry('pages', 'tags');
+if (!entry) throw new Error('pages/tags not found');
+
+const articles = await getCollection('article');
+const tagCounts = new Map<string, number>();
+for (const a of articles) {
+  const tags = (a.data as { tags?: string[] }).tags ?? [];
+  for (const t of tags) {
+    tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+  }
+}
+const tags = Array.from(tagCounts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+---
+
+<BaseLayout title={entry.data.title}>
+  <MarkdownContent content={entry} />
+  <ul style="list-style: none; padding: 0; margin-top: 2rem;">
+    {tags.map(([tag, count]) => (
+      <li style="margin-bottom: 0.75rem; display: flex; align-items: baseline; gap: 0.5rem;">
+        <a href={`/tags/${encodeURIComponent(tag)}`}>{tag}</a>
+        <span style="color: var(--color-muted); font-size: 0.9rem;">({count})</span>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

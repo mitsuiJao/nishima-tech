@@ -1,0 +1,14 @@
+{
+  "name": "homepage-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:homepage": "npm run dev -w @repo/homepage",
+    "dev:next": "npm run dev -w @repo/next",
+    "build:homepage": "npm run build -w @repo/homepage",
+    "build:next": "npm run build -w @repo/next",
+    "build": "npm run build:homepage && npm run build:next"
+  }
+}

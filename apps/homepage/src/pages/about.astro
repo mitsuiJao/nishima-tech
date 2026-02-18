@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarkdownContent from '../components/MarkdownContent.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('pages', 'about');
+if (!entry) throw new Error('pages/about not found');
+---
+
+<BaseLayout title={entry.data.title}>
+  <MarkdownContent content={entry} />
+</BaseLayout>
