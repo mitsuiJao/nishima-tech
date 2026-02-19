@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
+import rehypeKatex from 'rehype-katex';
 import rehypeOgCard from 'rehype-og-card';
+import remarkMath from 'remark-math';
 
 export default defineConfig({
   markdown: {
+    remarkPlugins: [remarkMath],
     rehypePlugins: [
       [
         rehypeOgCard,
@@ -15,6 +18,7 @@ export default defineConfig({
           enableSameTextURLConversion: true,
         },
       ],
+      rehypeKatex,
     ],
   },
 });

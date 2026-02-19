@@ -31,7 +31,7 @@ const filtered = articles
   <ul style="list-style: none; padding: 0;">
     {filtered.map((article) => (
       <li style="margin-bottom: 0.75rem;">
-        <a href={`/${article.slug}`}>{(article.data as { title?: string }).title ?? article.slug}</a>
+        <a href={`/${article.slug.replace(/\/index$/, '') || article.slug}`}>{(article.data as { title?: string }).title ?? article.slug}</a>
         {(article.data as { date?: string }).date && (
           <span style="color: var(--color-muted); font-size: 0.9rem; margin-left: 0.5rem;">
             {(article.data as { date?: string }).date}

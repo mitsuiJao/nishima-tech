@@ -45,7 +45,25 @@ npm run build:next      # Next.js のみ
 
 ### 記事の追加
 
-`apps/homepage/src/content/article/` にマークダウンファイルを置く。フロントマター例:
+- **`src/content/article/`** には記事（マークダウン）のみを置く。画像はここには置かない。
+- **画像** は `public/` に置く。記事からはサイトルート基準の絶対パスで参照する（例: `/webclass-nortify/image.png`）。
+
+**記事のみ（単一ファイル）**: `apps/homepage/src/content/article/xxx.md`
+
+**記事をディレクトリで管理する場合**: `apps/homepage/src/content/article/xxx/index.md`。画像は `public/xxx/` に配置し、マークダウンでは `/xxx/image1.png` のように指定する。
+
+例（webclass-nortify）:
+```
+src/content/article/webclass-nortify/
+  └── index.md
+public/webclass-nortify/
+  ├── image1.png
+  └── image2.png
+```
+
+マークダウン例: `![説明](/webclass-nortify/image1.png)`
+
+フロントマター例:
 
 ```yaml
 ---
@@ -57,9 +75,25 @@ tags:
 ---
 ```
 
+### LaTeX（数式）
+
+`remark-math` と `rehype-katex` でマークダウン内の数式をレンダリングする。
+
+- インライン: `$f(x) = x^2 + 1$`
+- ブロック: `$$\frac{a}{b}$$`
+
+例:
+```markdown
+$E = mc^2$ や $$\sum_{i=1}^n i = \frac{n(n+1)}{2}$$
+```
+
 ### リンクカード
 
 マークダウンで単独行に URL を書くと OGP カードに変換される（`rehype-og-card`）。
+
+### フッター
+
+全ページ共通のフッター（`Footer.astro`）で、Home / About / Articles / Tags / GitHub へのリンク、著作権表記、免責事項を表示している。
 
 ### テーマ
 

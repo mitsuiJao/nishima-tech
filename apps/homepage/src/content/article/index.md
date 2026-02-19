@@ -1,0 +1,221 @@
+---
+title: "Webclass課題をTeamsに通知しよう"
+date: 2025-02-16
+tags:
+  - kosen
+  - teams
+  - webclass
+---
+
+## 成果物
+https://github.com/mitsuiJao/webc-asgmt-notify
+
+## overview
+WebClassから取得した課題を任意のTeamsチャネルで通知します。
+主に高専の人向け
+
+1. WebClassスクレイピングで課題を取得 & Microsoftアカウントログイン
+2. 整形してResendからメールを送信
+3. teamsに通知が行く
+
+簡単にこんな流れです。
+
+## env
+- Ubuntu 22.04.5 LTS
+- Node v22.15.0
+    - pupperteer 24.34.0
+    - resend 6.7.0
+
+
+## setup
+0. ワークフローの作成
+1. チャネルのメールアドレス取得
+2. ドメインの取得
+3. Resendに登録
+4. 環境構築
+5. Microsoftログイン
+
+0が結構くせもので、Microsoftは組織が強いのでもしかしたら登録できない可能性は高いです。高専機構ではいけるかも
+
+あと5は必ずMFAコードを用いたログイン形式にしておくこと
+
+
+### 0.ワークフローの作成
+送りたいチャネルの右にある3つの点 > ワークフロー
+
+![alt text](/webclass-nortify/image1.png)
+
+\> 自分のメールをチャネルに転送する
+
+![alt text](/webclass-nortify/image2.png)
+
+\> 次へ （ここちょっと時間かかる） 
+
+![alt text](/webclass-nortify/image3.png)
+
+チームとチャネル適当に選択して ワークフローを追加する
+
+![alt text](/webclass-nortify/image4.png)
+
+ここまで来たらオッケー
+
+![alt text](/webclass-nortify/image5.png)
+
+
+組織で制限されてたらここまで来れない、ワークフロー作れなそうなら諦める
+
+
+### 1.メールアドレスの作成
+
+最初の画像のところにあるメールアドレスを取得、< >で囲われたメールアドレスをコピーしておく
+
+詳細から一応ドメインから絞れるけど一旦「だれでも」にしとく
+
+![alt text](/webclass-nortify/image6.png)
+
+### 2.ドメインの取得
+
+このプロジェクトではプログラムからAPIを通してメール送るので独自ドメインから送信した方が楽です
+
+GmailやoutlookとかのドメインからはOAUTHなどでAPIが複雑になりそうです。あとドメインのほうがかっこいい
+
+どこでもいいですが、cloudflareから取るのが安くておすすめです
+
+### 3.Resendに登録
+
+さっきからResend言ってますが、主に開発者のためのメール配信APIのことです。
+コードを数行書くだけでメール送信できます。
+
+https://resend.com/
+
+サインアップした後、ドメインも登録します。ここでは説明しません。
+
+もしDNSをcloudflare使っているのであれば簡単にDNSに登録することができます。
+右にあるSign in to Cloudflareをクリックしてログインするだけです。
+
+**必ずDMARCも登録する必要があります！** 
+
+cloudflareログインではDMARCレコードが自動で作成されないので手動で登録します
+
+DMARCを登録しないと普通迷惑メールに振り分けられるようで、その場合は正常に通知されません
+
+![alt text](/webclass-nortify/image7.png)
+
+
+### 4.環境構築
+
+このリポジトリをクローンします
+
+そしたらnode環境を整えます
+```bash
+npm install
+```
+
+.envの作成
+```bash
+cat << EOF > .env
+USER_ID='{your_ID}'
+PASSWORD='{your_password}'
+APIKEY='{Resend_APIKEY}'
+SENDFROM='notification@{your_domain}'
+SENDTO='{channel_mailaddress}'
+EOF
+```
+
+.envに以下を設定します
+```
+USER_ID='{your_ID}'
+PASSWORD='{your_password}'
+APIKEY="{Resend_APIKEY}"
+SENDFROM="notification@{your_domain}"
+SENDTO="{channel_mailaddress}"
+```
+
+| .env     | 用途                                                       | 
+| -------- | ---------------------------------------------------------- | 
+| USER_ID  | Microsoftアカウントのメールアドレス                        | 
+| PASSWORD | Microsoftアカウントのパスワード                            | 
+| APIKEY   | ResendのAPIKEY                                             | 
+| SENDFROM | ドメインのメールアドレス | 
+| SENDTO   | チャネルのメールアドレス                                   | 
+
+SENDFROMのnotificationの部分はなんでもいいです
+
+
+#### 補足
+Resendから直接メールを送信すると非常にブロックされる確率が高いので、いったんoutlookなどに送ってから転送してもらう形に変更します。
+outlookの設定からメール > ルール > 
+条件を差出人`{SENDFROM}`、アクションに指定のアドレスにリダイレクト(チャネルメールアドレス)にします。
+それに伴いResendの`{SENDTO}`を該当outlookのアドレスに変更します。
+ここでoutlook使っているのはたまたまteamsがシームレスに行けるかなーと思ってなのでリダイレクト機能があるサービスならなんでもいいです。
+
+![alt text](/webclass-nortify/image8.png)
+
+
+### 5.Microsoftログイン
+
+このプロジェクトではMFAアプリでのコード入力のみをサポートしています
+
+もし電話とかonedriveアプリ認証とかにしている場合は変更します
+
+初回実行は`src/scraper.js`を実行します
+
+```bash
+node --env-file=.env src/scraper.js
+```
+
+しばらくするとMFAコードの入力が求められます
+
+Code: が表示されたら、Google Authenticatorなどで生成されたコードを入力してください。
+
+```
+.....
+Waiting for email input...
+Waiting for password input...
+Waiting for authentication challenge...
+TOTP (Google Authenticator) detected.
+Code: 562860
+Entering confirmation code: 562860
+Waiting for final redirection to WebClass...
+.....
+```
+
+`output/assignments.json`に課題のJSONが、ルートに`cookies.json`ができたことを確認してください
+
+これでWebClassに通常のログインが完了し、そのcookieが保存されます
+
+次回実行時はこのcookieが保存され、あのリンクを踏むだけでログインできます。つまりこのMFAコードの入力は不要です。
+
+
+cookies.jsonがある場合は
+```bash
+node --env-file=.env index.js
+```
+を実行します。cronで5分間隔とかに設定しておきます。
+
+
+`index.js`を実行時にログインセッションが切れたら（MFAコードが求められる）
+.envののほうにメールが行きます
+
+cookieの更新は`scraper.js`を実行して初期設定と同じように認証します
+
+
+### 補足
+独自ドメインからのメールはスパム対策に厳しく、簡単にブロックされる可能性があります（実際に僕は一度ブロックされました）
+
+回避策としてoutlookやGmailに一度送信し、そこから転送設定でチャネルメールアドレスに転送する方法があります
+
+必要に応じて対応してみてください
+
+#### 追記
+- github actionsで動かせるように`.github/workflows/cron.yml`に置いときました。使うときは`disable`を外してください
+
+- 結局ローカルサーバでcrontabする方法で落ち着きました。半月ほど動かしましたが、正常に機能しています。
+
+:::message alert
+cron頻繁にしすぎてioエラー出て死にました！まじで気を付けて！コマンドなにも打てない！
+:::
+
+
+## contact
+`22126@yonago.kosen-ac.jp`
