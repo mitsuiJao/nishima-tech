@@ -26,6 +26,11 @@
       "content": "pages/tags.md"
     },
     {
+      "path": "/privacy-policy",
+      "title": "Privacy policy",
+      "content": "pages/privacy-policy.md"
+    },
+    {
       "path": "/[slug]",
       "title": "",
       "content": "article",
