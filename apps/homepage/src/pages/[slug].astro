@@ -16,5 +16,42 @@ const title = (article.data as { title?: string }).title ?? article.slug;
 ---
 
 <BaseLayout title={title}>
+  <div class="post-article">
+    <h1>{article.data.title}</h1>
+    <p>{article.data.date}</p>
+  </div>
+  <!-- <ul>
+    {article.data.tags.map(tag => (
+      <li>#{tag}</li>
+    ))}
+  </ul> -->
   <MarkdownContent content={article} />
 </BaseLayout>
+
+<style>
+  /* 1a1a1a */
+.post-article {
+    /* 背景や枠線を消してシンプルに */
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+
+    /* 下線と余白で「ここから本文」という境界を作る */
+    margin-bottom: 3rem;   /* 本文との間の距離 */
+    padding-bottom: 3rem; /* タイトルから下線までの距離 */
+    border-bottom: 1px solid #333; /* 控えめな区切り線 */
+  }
+
+  .post-article h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+
+  .post-article p {
+    color: #888;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+</style>

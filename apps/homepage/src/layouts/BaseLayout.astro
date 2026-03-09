@@ -205,7 +205,7 @@ const metaDesc = description || siteDesc;
         <slot name="headerTitle">
           <a href="/" style="font-weight: 800;">nishima-techメモ</a>
         </slot>
-        {
+        <!-- {
           config.routes
             ?.filter(
               (r: { path: string }) => r.path !== "/" && !r.path.includes("["),
@@ -213,7 +213,10 @@ const metaDesc = description || siteDesc;
             ?.map((r: { path: string; title: string }) => (
               <a href={r.path}>{r.title}</a>
             ))
-        }
+        } -->
+        <a href="about">About</a>
+        <a href="articles">Article</a>
+        <a href="tags">Tags</a>
 
         <a
           href="https://github.com/mitsuijao"
