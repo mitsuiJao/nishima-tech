@@ -1,14 +1,21 @@
 {
-  "name": "homepage-monorepo",
-  "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
+  "name": "homepage",
+  "type": "module",
+  "version": "0.0.0",
   "scripts": {
-    "dev:homepage": "npm run dev -w @repo/homepage",
-    "dev:next": "npm run dev -w @repo/next",
-    "build:homepage": "npm run build -w @repo/homepage",
-    "build:next": "npm run build -w @repo/next",
-    "build": "npm run build:homepage && npm run build:next"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "astro": "^6.3.7",
+    "astro-expressive-code": "^0.42.0",
+    "rehype-class-names": "^2.0.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "rehype-og-card": "^3.1.0"
   }
 }

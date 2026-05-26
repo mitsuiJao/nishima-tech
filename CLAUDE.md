@@ -4,33 +4,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-npm workspaces monorepo containing two apps:
-- **apps/homepage** — Astro 4 static site (tech notes & articles). Japanese-language content.
-- **apps/next** — Next.js 16 + App Router + Tailwind CSS 4 app.
+Astro 4 static site (tech notes & articles). Japanese-language content.
 
 ## Commands
 
 ```bash
-npm install                # install all workspace deps
+npm install        # install deps
 
 # Development
-npm run dev:homepage       # Astro dev server → http://localhost:4321
-npm run dev:next           # Next.js dev server → http://localhost:3000
+npm run dev        # Astro dev server → http://localhost:4321
 
 # Build
-npm run build              # build both apps
-npm run build:homepage     # Astro only
-npm run build:next         # Next.js only
+npm run build      # Astro build
 
-# Next.js lint
-npm run lint -w @repo/next
+# Preview
+npm run preview    # preview built site
 ```
 
 No test framework is configured.
 
-## Architecture — apps/homepage (Astro)
+## Architecture
 
-Routing and navigation are driven by `apps/homepage/src/config.json`, which defines all routes, their titles, and which content files or collections they map to. Pages in `src/pages/` read this config to render the correct markdown content.
+Routing and navigation are driven by `src/config.json`, which defines all routes, their titles, and which content files or collections they map to. Pages in `src/pages/` read this config to render the correct markdown content.
 
 **Content model:**
 - `src/content/pages/` — static page markdown (home, about, etc.)
