@@ -13,3 +13,24 @@ const { Content } = await render(content);
 <article class="markdown-body">
   <Content />
 </article>
+
+<script>
+  import mediumZoom from 'medium-zoom';
+
+  const markdownImages = '.markdown-body img';
+  mediumZoom(markdownImages, {
+    margin: 24,
+    background: 'rgba(0, 0, 0, 0.85)',
+  });
+</script>
+
+<style>
+  :global(.markdown-body img) {
+    display: block;
+    width: auto;
+    max-width: min(100%, 90vw, 960px);
+    height: auto;
+    margin: 1.5rem auto;
+    cursor: zoom-in;
+  }
+</style>
