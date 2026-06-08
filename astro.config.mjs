@@ -5,6 +5,10 @@ import remarkMath from 'remark-math';
 import rehypeClassNames from 'rehype-class-names';
 import astroExpressiveCode from 'astro-expressive-code';
 
+// process.argv is ['node', 'astro', 'dev'|'build'|'preview'] — more reliable than npm_lifecycle_event
+// which becomes undefined when Astro internally reloads the config
+const isDev = process.argv.includes('dev');
+
 export default defineConfig({
   integrations: [
     astroExpressiveCode()
@@ -13,7 +17,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [
-      [
+      ...(!isDev ? [[
         rehypeOgCard,
         {
           buildCache: true,
@@ -23,7 +27,7 @@ export default defineConfig({
           openInNewTab: true,
           enableSameTextURLConversion: true,
         },
-      ],
+      ]] : []),
       [
         rehypeClassNames,
         {
