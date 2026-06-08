@@ -31,7 +31,7 @@
       "content": "pages/privacy-policy.md"
     },
     {
-      "path": "/[slug]",
+      "path": "/article/[slug]",
       "title": "",
       "content": "article",
       "dynamic": true
