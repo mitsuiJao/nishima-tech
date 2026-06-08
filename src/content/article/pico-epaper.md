@@ -10,7 +10,9 @@ tags:
 ---
 
 ↓僕が買ったやつ
+
 https://www.waveshare.com/pico-epaper-7.5-b.htm
+
 picoだとメモリが足りないのでRaspberry pi 3 model Bを使います。
 pico用のe-paper変換ドライバーはラズパイで直接使えないのでジャンパ線でつなぎます。
 

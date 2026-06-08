@@ -61,10 +61,13 @@ route53のレコードを書き換えるためのポリシーです。
 
 ### bashを置く
 jqを事前にインストールしておきます。
+
 https://qiita.com/wnoguchi/items/70a808a68e60651224a4
 
 そしたらbashとひな形のJSONを同じディレクトリにコピペなりクローンなりしてください
+
 https://github.com/mitsuiJao/route53_ddns/blob/main/ddns.sh
+
 https://github.com/mitsuiJao/route53_ddns/blob/main/changes.json
 
 

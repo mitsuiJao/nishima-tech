@@ -29,13 +29,17 @@ tags:
 
 
 ## 参考
+
 https://www.manualslib.com/manual/1401405/Cisco-890-Series.html?page=4#manual
+
 https://pinoutguide.com/ChargersAdapters/Cisco_890_Series_PSU_pinout.shtml
+
 ↑ここに書いてある表は違うので注意
 
 
 #### P.S.
 ![](https://storage.googleapis.com/zenn-user-upload/0428660e85a7-20250922.jpeg =500x)
+
 https://amzn.asia/d/5BqGOKU
 
 AC100V -> DC12V に変換する安定化電源です

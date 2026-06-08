@@ -93,7 +93,9 @@ fn my_function(foo: i32, bar: i32) -> i32 {
 戻り値の型を後ろの方に書くの、見にくいかも
 
 ## 配列
+
 https://qiita.com/k-yaina60/items/26bf1d2e372042eff022
+
 この記事めっちゃ助かります
 
 ```rust
@@ -106,7 +108,9 @@ let v: Vec<i32> = vec![0 ,1, 2];
 スライスはまた今度！
 
 ## 所有権について
+
 https://www.tohoho-web.com/ex/rust.html#ownership
+
 助かります。
 
 > ただひとつの変数がヒープ上のメモリの 所有権(ownership) を持ち、所有者がスコープから消えた時点でヒープ領域も開放されます。
