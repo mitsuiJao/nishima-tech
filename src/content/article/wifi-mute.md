@@ -2,6 +2,7 @@
 title: "Wi-Fi自動ミュート機能を実装しよう"
 date: 2026-05-06
 tags:
+  - automation
   - windows
   - powershell
 ---

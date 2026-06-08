@@ -2,6 +2,7 @@
 title: Astro でサイトを立てる
 date: 2025-03-08
 tags:
+  - web
   - astro
   - setup
 ---

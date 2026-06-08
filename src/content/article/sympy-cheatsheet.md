@@ -2,6 +2,7 @@
 title: "Sympy早見"
 date: 2025-11-25
 tags:
+  - programming
   - python
   - sympy
 ---

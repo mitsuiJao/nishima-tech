@@ -2,6 +2,7 @@
 title: "rust基本文法"
 date: 2024-12-16
 tags:
+  - programming
   - rust
 ---
 
