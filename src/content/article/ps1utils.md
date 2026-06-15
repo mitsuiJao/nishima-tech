@@ -56,7 +56,7 @@ param(
     [Parameter(Mandatory=$true, Position=1)][string]$RemotePath
 )
 
-$LocalDir = "C:\Users\nishi\Downloads"
+$LocalDir = "C:\Users\user\Downloads"
 
 scp -r "${Target}:${RemotePath}" "$LocalDir"
 ```
@@ -65,6 +65,12 @@ scp -r "${Target}:${RemotePath}" "$LocalDir"
 
 ```powershell
 .\fetch.ps1 {ssh-to} {src-path}
+
+# リモートにある写真をダウンロード
+.\fetch.ps1 admin@172.16.0.1 ~/img/image.png
+
+# configに設定があるなら
+.\fetch.ps1 host ~/img/image.png
 ```
 
 `ssh-to` にはSSH config に書いてあるホスト名(またはIPアドレス)、`src-path` にはリモート側のパス
@@ -73,7 +79,10 @@ scp -r "${Target}:${RemotePath}" "$LocalDir"
 
 ダウンロード先は `$LocalDir` で固定しているので、環境に合わせて変えてください、おすすめはダウンロードディレクトリです
 
-出力された画像とか、csvとかを見るのにおすすめ
+出力された画像とか、csvとか手元で見るのにおすすめ
+
+あと公開鍵暗号をconfigで適用したときの環境しか試してないので、user@ip のパスワード認証ではどうなるか分からないです。
+
 
 ---
 
@@ -104,6 +113,8 @@ ssh -N -L "${LocalHost}:${LocalPort}:localhost:${RemotePort}" $Target
 ### 使い方
 
 ```powershell
+.\forward.ps1 {ssh-to} {port}
+
 # リモートの3000番をローカルの3000番に転送
 .\forward.ps1 {ssh-to} 3000
 
@@ -113,6 +124,8 @@ ssh -N -L "${LocalHost}:${LocalPort}:localhost:${RemotePort}" $Target
 
 `-N` でシェルを開かずにフォワーディングだけ, `-L` のオプションは `ローカルアドレス:ローカルポート:リモート側localhost:リモートポート` の形式です
 
-localport = remoteport にしているので、リモートのポートと同じポートをローカルのポートにバインドできます。直感的ですね。
+デフォルトでlocalのlocalhost:{port}にバインドされます。使い方2個目のようにローカルのバインドするipを変えることもできます。
+
+localport = remoteport にしているので、リモートのポートと同じポートをローカルのポートにバインドすることになります。直感的ですね。
 
 Ctrl+C で終了、開発サーバ上でしか動いていないWebサービスを手元のブラウザで確認したいときに使えます
