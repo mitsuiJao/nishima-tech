@@ -73,6 +73,8 @@ scp -r "${Target}:${RemotePath}" "$LocalDir"
 
 ダウンロード先は `$LocalDir` で固定しているので、環境に合わせて変えてください、おすすめはダウンロードディレクトリです
 
+出力された画像とか、csvとかを見るのにおすすめ
+
 ---
 
 ## forward.ps1
@@ -114,24 +116,3 @@ ssh -N -L "${LocalHost}:${LocalPort}:localhost:${RemotePort}" $Target
 localport = remoteport にしているので、リモートのポートと同じポートをローカルのポートにバインドできます。直感的ですね。
 
 Ctrl+C で終了、開発サーバ上でしか動いていないWebサービスを手元のブラウザで確認したいときに使えます
-
----
-
-
----
-
-## まとめ
-
-| スクリプト | やること |
-|---|---|
-| fetch.ps1 | scpでリモートのファイルをローカルに取得 |
-| forward.ps1 | SSHポートフォワーディングをワンライナーで |
-| mount.ps1 | 管理者権限でWSLに物理ディスクをマウント |
-
-どれも短いが、都度コマンドを組み立てるより楽になった。
-
----
-
-## contact
-
-`nishima[at]example.com`
