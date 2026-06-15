@@ -17,9 +17,9 @@ title: home
 
 ## pick up
 
-- [rust基本文法](/rust-basics)
-- [WireGuardを使用したVPNを構築する](/launch-vpn)
-- [Webclass課題をTeamsに通知しよう](/webclass-notify)
-- [Pico用のe-paperをラズパイで使うには](/pico-epaper)
+- [rust基本文法](article/rust-basics)
+- [WireGuardを使用したVPNを構築する](article/launch-vpn)
+- [Webclass課題をTeamsに通知しよう](article/webclass-notify)
+- [Pico用のe-paperをラズパイで使うには](article/pico-epaper)
 
 → [すべての記事](/articles)

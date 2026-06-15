@@ -17,7 +17,7 @@ tags:
 ## ピンアサインはこれだ
 コネクタはよくある電源ユニットについてあるATX12Vをそのまま使うことができますが、ピン配列が違うので配線を入れ替える必要があります
 
-![](https://storage.googleapis.com/zenn-user-upload/a9efd9c32877-20250922.jpeg =300x)
+![](/cisco-pin-assignment/image1.jpeg)
 
 | 爪        | 爪                  | 
 | --------- | ------------------- | 
@@ -38,7 +38,7 @@ https://pinoutguide.com/ChargersAdapters/Cisco_890_Series_PSU_pinout.shtml
 
 
 #### P.S.
-![](https://storage.googleapis.com/zenn-user-upload/0428660e85a7-20250922.jpeg =500x)
+![](/cisco-pin-assignment/image2.jpeg)
 
 https://amzn.asia/d/5BqGOKU
 
