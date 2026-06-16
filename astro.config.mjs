@@ -4,14 +4,17 @@ import rehypeOgCard from 'rehype-og-card';
 import remarkMath from 'remark-math';
 import rehypeClassNames from 'rehype-class-names';
 import astroExpressiveCode from 'astro-expressive-code';
+import sitemap from '@astrojs/sitemap';
 
 // process.argv is ['node', 'astro', 'dev'|'build'|'preview'] — more reliable than npm_lifecycle_event
 // which becomes undefined when Astro internally reloads the config
 const isDev = process.argv.includes('dev');
 
 export default defineConfig({
+  site: 'https://nishima-tech.com',
   integrations: [
-    astroExpressiveCode()
+    astroExpressiveCode(),
+    sitemap(),
   ],
   
   markdown: {

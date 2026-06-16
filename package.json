@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.3.7",
     "astro-expressive-code": "^0.42.0",
     "medium-zoom": "^1.1.0",
