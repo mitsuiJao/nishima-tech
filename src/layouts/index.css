@@ -152,75 +152,49 @@ h3 {
   color: var(--color-text);
 }
 
-/* テーブルの外枠（ReactのCardコンポーネントのような質感） */
-  .custom-table-root {
-    width: 100%;
-    margin: 2.5rem 0;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    overflow: hidden;
-    font-variant-numeric: tabular-nums; /* 数字の幅を揃える */
-  }
+/* markdown テーブル (rehype-class-names で注入) */
+.custom-table-root {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--color-border);
+}
 
-  /* ヘッダーセクション */
-  .custom-table-header {
-    background-color: #f9fafb;
-  }
+.custom-table-th {
+  padding: 0.55rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
 
-  .custom-table-th {
-    padding: 14px 20px;
-    text-align: left;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #6b7280;
-    border-bottom: 2px solid #e5e7eb;
-  }
+.custom-table-tr {
+  border-bottom: 1px solid #222;
+  transition: background 0.1s;
+}
 
-  /* 行とセルの基本設定 */
-  .custom-table-tr {
-    transition: background-color 0.2s ease;
-  }
+.custom-table-tr:last-child .custom-table-td {
+  border-bottom: none;
+}
 
-  .custom-table-tr:hover {
-    background-color: #fcfcfd;
-  }
+.custom-table-tr:hover {
+  background: #1e1e1e;
+}
 
-  .custom-table-td {
-    padding: 14px 20px;
-    font-size: 0.925rem;
-    color: #374151;
-    border-bottom: 1px solid #f3f4f6;
-    line-height: 1.6;
-  }
+.custom-table-td {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  vertical-align: top;
+}
 
-  .custom-table-tr:last-child .custom-table-td {
-    border-bottom: none;
-  }
-
-  /* 【ここがリッチの決め手】1列目（.envなど）の自動装飾 */
-  .custom-table-td:first-child {
-    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-    font-weight: 600;
-    color: #0284c7; /* 透明感のあるブルー */
-    background-color: #f0f9ff;
-    border-right: 1px solid #e0f2fe;
-    width: 35%;
-  }
-
-  /* ダークモード対応（システム設定に追従する場合） */
-  @media (prefers-color-scheme: dark) {
-    .custom-table-root { border-color: #374151; background-color: #111827; }
-    .custom-table-header { background-color: #1f2937; }
-    .custom-table-th { color: #9ca3af; border-bottom-color: #374151; }
-    .custom-table-td { color: #e5e7eb; border-bottom-color: #1f2937; }
-    .custom-table-td:first-child { 
-      background-color: rgba(2, 132, 199, 0.1); 
-      color: #38bdf8; 
-      border-right-color: #1f2937; 
-    }
-    .custom-table-tr:hover { background-color: #1f2937; }
-  }
+.custom-table-td:first-child {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  white-space: nowrap;
+}

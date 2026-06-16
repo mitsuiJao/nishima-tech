@@ -1,0 +1,95 @@
+---
+interface Props {
+  headers: string[];
+  rows: string[][];
+  caption?: string;
+}
+
+const { headers, rows, caption } = Astro.props;
+---
+
+<div class="gt-wrap">
+  {caption && <p class="gt-caption">{caption}</p>}
+  <div class="gt-scroll">
+    <table class="gt">
+      <thead>
+        <tr>
+          {headers.map((h) => <th class="gt-th">{h}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr class="gt-tr">
+            {row.map((cell, i) => (
+              <td class={`gt-td${i === 0 ? ' gt-td--key' : ''}`}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .gt-wrap {
+    margin: 2rem 0;
+  }
+
+  .gt-caption {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-muted);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gt-scroll {
+    overflow-x: auto;
+  }
+
+  .gt {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .gt-th {
+    padding: 0.55rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .gt-tr {
+    border-bottom: 1px solid #222;
+    transition: background 0.1s;
+  }
+
+  .gt-tr:last-child {
+    border-bottom: none;
+  }
+
+  .gt-tr:hover {
+    background: #1e1e1e;
+  }
+
+  .gt-td {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .gt-td--key {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+</style>
