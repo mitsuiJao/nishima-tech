@@ -115,9 +115,23 @@ h3 {
   margin-bottom: 0.35rem;
 }
 .og-card-description {
-  display: none;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .og-card-url-container {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+.og-card-favicon {
   display: none;
 }
 .og-card-image-container {
