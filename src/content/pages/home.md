@@ -28,5 +28,5 @@ title: home
 
 ## omake
 
-可愛すぎるやつ
+実家の可愛すぎるやつ
 ![alt](/image.png)
