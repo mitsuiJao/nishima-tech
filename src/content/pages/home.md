@@ -17,9 +17,16 @@ title: home
 
 ## pick up
 
-- [rust基本文法](article/rust-basics)
-- [WireGuardを使用したVPNを構築する](article/launch-vpn)
+- [制作物](article/tools)
 - [Webclass課題をTeamsに通知しよう](article/webclass-notify)
+- [WireGuardを使用したVPNを構築する](article/launch-vpn)
 - [ps1スクリプト忘備](article/ps1utils)
 
 → [すべての記事](/articles)
+
+
+
+## omake
+
+可愛すぎるやつ
+![alt](/image.png)
