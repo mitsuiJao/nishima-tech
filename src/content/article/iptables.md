@@ -94,3 +94,18 @@ sudo iptables -A INPUT -s 192.168.1.0/24 -j ACCEPT
 
 `--dport`, `--sport`は`-p tcp`などとセットで使う
 
+
+## 保存
+```bash
+sudo netfilter-persistent save
+```
+
+もし入ってなければ入れる
+
+```bash
+sudo apt install iptables-persistent
+```
+
+カーネルのメモリに乗ってるだけなので、シャットダウンで消える、揮発性
+
+内部的にファイルに書き出して起動時に読み込んでる
