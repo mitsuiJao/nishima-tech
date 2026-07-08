@@ -15,7 +15,24 @@ title: home
 - Python / C / C++ / JavaScript / TypeScript / Rust
 - [GitHub](https://github.com/mitsuijao)
 
-## pick up
+
+## background
+
+- 2022/4 米子高専入学
+- 2022/8 マックで働く
+- 2023/5 基本情報技術者試験合格
+- 2023/10 応用情報技術者試験合格
+- 2024/6 プールで働く
+- 2025/9 エスアイエス・テクノサービス株式会社 インターンシップに参加
+- 2025/11 プログラミング学習塾で働く
+
+中学では水泳で県総体優勝
+
+高専では高専大会中国大会優勝、また軽音楽部でドラムを担当
+
+
+## Article - pick up
+
 
 - [制作物](article/tools)
 - [Webclass課題をTeamsに通知しよう](article/webclass-notify)
@@ -24,6 +41,10 @@ title: home
 
 → [すべての記事](/articles)
 
+
+ここで公開していない記事はZennにいくつかあります。
+
+https://zenn.dev/mitsuijao
 
 
 ## omake
