@@ -19,12 +19,16 @@ const title = (article.data as { title?: string }).title ?? article.id;
   <div class="post-article">
     <h1>{article.data.title}</h1>
     <p>{article.data.date}</p>
+    {article.data.tags && article.data.tags.length > 0 && (
+      <ul class="tag-list">
+        {article.data.tags.map((tag) => (
+          <li>
+            <a href={`/tags/${encodeURIComponent(tag)}`}>{tag}</a>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
-  <!-- <ul>
-    {article.data.tags.map(tag => (
-      <li>#{tag}</li>
-    ))}
-  </ul> -->
   <MarkdownContent content={article} />
 </BaseLayout>
 
@@ -53,5 +57,34 @@ const title = (article.data as { title?: string }).title ?? article.id;
     color: #888;
     font-size: 0.9rem;
     margin: 0;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+  }
+
+  .tag-list li {
+    margin: 0;
+  }
+
+  .tag-list a {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .tag-list a:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 </style>
