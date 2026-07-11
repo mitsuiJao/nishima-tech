@@ -2,11 +2,9 @@
 title: "Pico用のe-paperをラズパイで使うには"
 date: 2025-09-01
 tags:
-  - embedded
   - raspberrypi
   - raspberrypipico
-  - epaper
-  - micropython
+  - iot
 ---
 
 ↓僕が買ったやつ

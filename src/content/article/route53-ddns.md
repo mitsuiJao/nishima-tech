@@ -2,11 +2,10 @@
 title: "route53のDDNS"
 date: 2025-06-01
 tags:
-  - infra
   - aws
   - dns
-  - route53
-  - ddns
+  - network
+  - automation
 ---
 
 ## はじめに

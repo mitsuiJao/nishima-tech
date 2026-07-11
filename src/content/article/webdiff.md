@@ -4,9 +4,8 @@ date: 2026-06-16
 tags:
   - react
   - typescript
-  - vite
   - cloudflare
-  - tools
+  - product
 ---
 
 ## 成果物

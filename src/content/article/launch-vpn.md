@@ -2,10 +2,10 @@
 title: WireGuardを使用したVPNを構築する
 date: 2025-03-08
 tags:
-  - infra
-  - WireGuard
-  - VPN
-  - AWS
+  - wireguard
+  - vpn
+  - aws
+  - network
 ---
 
 ## WireGuard

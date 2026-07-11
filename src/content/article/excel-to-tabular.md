@@ -2,11 +2,8 @@
 title: "ExcelからLaTeXのtabularに変換するために(忘備録)"
 date: 2025-07-14
 tags:
-  - automation
   - excel
   - latex
-  - tabular
-  - csv
 ---
 
 ## 結論

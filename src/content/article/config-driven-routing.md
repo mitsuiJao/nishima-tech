@@ -3,8 +3,7 @@ title: config.json でルーティング
 date: 2025-02-19
 tags:
   - web
-  - config
-  - routing
+  - settings
 ---
 
 ## 設計

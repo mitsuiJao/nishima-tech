@@ -2,9 +2,9 @@
 title: "Cisco 4pin 電源のピンアサイン"
 date: 2025-09-22
 tags:
-  - infra
   - cisco
-  - router
+  - settings
+  - network
 ---
 
 > **注意:** ショートには十分気を付けよう

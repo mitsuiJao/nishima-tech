@@ -3,9 +3,9 @@ title: "Webclass課題をTeamsに通知しよう"
 date: 2025-02-16
 tags:
   - automation
-  - kosen
   - teams
   - webclass
+  - product
 ---
 
 ## 成果物
