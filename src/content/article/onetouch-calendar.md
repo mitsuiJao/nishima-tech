@@ -10,8 +10,8 @@ tags:
 
 ![全般タブ](/onetouch-calendar/onetouch-calendar.png)
 
-Chrome Web Store 申請中
 
+https://chromewebstore.google.com/detail/one-touch-calendar/lmgkjjlpffgiklcbecgfkhboifoeohee
 
 
 ワンクリックでGoogleカレンダーに予定を追加できます。ページを離れる必要はありません。
