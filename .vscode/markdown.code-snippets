@@ -39,5 +39,15 @@
 			"",
 			"$0"
 		]
+	},
+	"latex_display": {
+		"scope": "markdown",
+		"prefix": "la",
+		"body": [
+			"$$",
+			"$1",
+			"$$",
+			"$0"
+		]
 	}
 }
