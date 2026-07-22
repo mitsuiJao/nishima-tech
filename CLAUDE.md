@@ -32,7 +32,7 @@ Routing and navigation are driven by `src/config.json`, which defines all routes
 - `src/content/article/` — article markdown (single file `foo.md` or directory `foo/index.md`)
 - Articles are listed at `/articles` and served individually at `/<slug>`
 
-**Images for articles** go in `public/<slug>/`, never in the content directory. Reference via absolute path (`/slug/image.png`).
+**Images for articles** live next to the markdown, not in `public/`. If an article has images, use the directory form (`src/content/article/foo/index.md`) and put images in the same directory, referenced by relative path (`./image.png`). Astro's asset pipeline picks up relative image paths inside content collections automatically (optimizes to WebP, adds width/height, lazy-loads) — no extra config needed. Articles with no images can stay as a single `foo.md` file.
 
 **Article frontmatter:** `title`, `date` (YYYY-MM-DD), `tags` (array).
 

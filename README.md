@@ -31,23 +31,18 @@ npm run preview
 
 ## 記事の追加
 
-- **`src/content/article/`** には記事（マークダウン）のみを置く。画像はここには置かない。
-- **画像** は `public/` に置く。記事からはサイトルート基準の絶対パスで参照する（例: `/webclass-notify/image.png`）。
-
-**記事のみ（単一ファイル）**: `src/content/article/xxx.md`
-
-**記事をディレクトリで管理する場合**: `src/content/article/xxx/index.md`。画像は `public/xxx/` に配置し、マークダウンでは `/xxx/image1.png` のように指定する。
+- 画像がない記事: **`src/content/article/xxx.md`** の単一ファイルでよい。
+- 画像がある記事: **`src/content/article/xxx/index.md`** というディレクトリ構成にし、画像も同じディレクトリに置く。マークダウンからは相対パスで参照する（例: `./image1.png`）。Astro のアセットパイプラインが自動的に最適化（WebP変換など）して配信する。
 
 例（webclass-notify）:
 ```
 src/content/article/webclass-notify/
-  └── index.md
-public/webclass-notify/
+  ├── index.md
   ├── image1.png
   └── image2.png
 ```
 
-マークダウン例: `![説明](/webclass-notify/image1.png)`
+マークダウン例: `![説明](./image1.png)`
 
 フロントマター例:
 
