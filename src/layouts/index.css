@@ -83,67 +83,25 @@ h3 {
   font-size: 1.2rem;
 }
 
-/* リンクカード (rehype-og-card) */
+/* リンクカード (src/lib/og-card) */
 .og-card-container {
   margin: 1.5rem 0;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
-}
-.og-card-container a {
-  display: flex;
-  text-decoration: none;
-  color: inherit;
-}
-.og-card-container a:hover {
-  text-decoration: none;
+  transition: border-color 0.15s ease;
 }
 .og-card-container:hover {
   border-color: var(--color-accent);
 }
-.og-card-info {
-  flex: 1;
-  padding: 1rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 0;
+.og-card-container a {
+  display: block;
+  line-height: 0;
 }
-.og-card-title {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.35rem;
-}
-.og-card-description {
-  font-size: 0.9rem;
-  color: var(--color-muted);
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.og-card-url-container {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--color-muted);
-}
-.og-card-favicon {
-  display: none;
-}
-.og-card-image-container {
-  flex-shrink: 0;
-  width: 140px;
-  height: 105px;
-  background: var(--color-border);
-}
-.og-card-image {
+.og-card-container img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 /* KaTeX ダークモード用 */
