@@ -7,19 +7,19 @@ tags:
 ---
 
 ## 結論
-![](/excel-to-tabular/image1.png)
+![](./image1.png)
 `=TEXT({value},"0.00E+0")`
 
-![](/excel-to-tabular/image2.png)
+![](./image2.png)
 `=REGEXREPLACE({value}, "([0-9]\.[0-9]{2})E(-?[0-9])", "\$$1\\times 10^{$2}\$")`
 
-![](/excel-to-tabular/image3.png)
+![](./image3.png)
 
 
 https://rra.yahansugi.com/scriptapplet/csv2tabular/
 
 このサイトでCVSからtabularに変換、
-![](/excel-to-tabular/image4.png)
+![](./image4.png)
 
 
 指数部が負数でも対応、有効数字は適宜変えて下さい。ある程度正規表現が分かればわかると思います。TEXT関数は数値から直接変換できないので使う必要がありました。

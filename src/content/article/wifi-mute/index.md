@@ -101,10 +101,10 @@ C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 
 まず全般タブにある最上位の特権で実行するをオン
 
-![全般タブ](/wifi-mute/image2.png)
+![全般タブ](./image2.png)
 
 次、条件タブのコンピュータをAC電源で使用している場合のみタスクを開始するをオフに
-![条件タブ](/wifi-mute/image1.png)
+![条件タブ](./image1.png)
 
 このチェックが入ったままだとバッテリー駆動中にタスクが発火しません。
 

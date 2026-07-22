@@ -8,7 +8,7 @@ tags:
   - product
 ---
 
-![全般タブ](/onetouch-calendar/onetouch-calendar.png)
+![全般タブ](./onetouch-calendar.png)
 
 
 https://chromewebstore.google.com/detail/one-touch-calendar/lmgkjjlpffgiklcbecgfkhboifoeohee
