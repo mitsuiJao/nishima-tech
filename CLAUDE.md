@@ -39,6 +39,7 @@ Routing and navigation are driven by `src/config.json`, which defines all routes
 **Markdown pipeline** (configured in `astro.config.mjs`):
 - `remark-math` + `rehype-katex` — LaTeX math rendering
 - local plugin `src/lib/og-card/` — bare URLs on their own line become OGP link cards, pre-rendered at build time as a PNG via satori + resvg (title/description/favicon/thumbnail baked into the image; border/hover stays real CSS), committed under `public/og-card/`; metadata and fonts cache to `.cache/og-card/`
+- `rehype-external-links` — any external link (including ones that failed to become an OGP card) opens in a new tab (`target="_blank" rel="noopener noreferrer"`); links back to this site are excluded
 
 **Layout:** `BaseLayout.astro` wraps all pages with dark-mode CSS variables. Shared `header.astro` and `Footer.astro` components.
 
