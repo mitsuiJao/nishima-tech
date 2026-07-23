@@ -7,6 +7,8 @@ import {
   CARD_WIDTH,
   CARD_HEIGHT,
   THUMB_WIDTH,
+  THUMB_MIN_WIDTH,
+  THUMB_MAX_WIDTH,
   FONT_CACHE_DIR,
   FONT_FAMILY_STACK,
   FONT_SPECS,
@@ -108,14 +110,23 @@ function hashToHue(text) {
   return hash % 360;
 }
 
-function buildThumbnailNode({ thumbnailDataUri, faviconDataUri, hostname }) {
+// Falls back to the fixed THUMB_WIDTH when dimensions weren't readable, so a
+// photo whose aspect ratio is unknown still lays out like the no-photo case.
+function computeThumbnailWidth(naturalWidth, naturalHeight) {
+  if (!naturalWidth || !naturalHeight) return THUMB_WIDTH;
+  const idealWidth = Math.round((naturalWidth / naturalHeight) * CARD_HEIGHT);
+  return Math.min(THUMB_MAX_WIDTH, Math.max(THUMB_MIN_WIDTH, idealWidth));
+}
+
+function buildThumbnailNode({ thumbnailDataUri, thumbnailWidth, thumbnailHeight, faviconDataUri, hostname }) {
   if (thumbnailDataUri) {
     return {
       type: 'img',
       props: {
         src: thumbnailDataUri,
-        width: THUMB_WIDTH,
+        width: computeThumbnailWidth(thumbnailWidth, thumbnailHeight),
         height: CARD_HEIGHT,
+        // Kept for when clamping pulls the width away from the true aspect ratio.
         style: { objectFit: 'cover', flexShrink: 0 },
       },
     };
@@ -167,7 +178,15 @@ function buildThumbnailNode({ thumbnailDataUri, faviconDataUri, hostname }) {
   };
 }
 
-export function buildCardTree({ title, description, hostname, thumbnailDataUri, faviconDataUri }) {
+export function buildCardTree({
+  title,
+  description,
+  hostname,
+  thumbnailDataUri,
+  thumbnailWidth,
+  thumbnailHeight,
+  faviconDataUri,
+}) {
   const hostRow = {
     type: 'div',
     props: {
@@ -246,7 +265,10 @@ export function buildCardTree({ title, description, hostname, thumbnailDataUri, 
         background: '#161616',
         fontFamily: FONT_FAMILY_STACK,
       },
-      children: [textColumn, buildThumbnailNode({ thumbnailDataUri, faviconDataUri, hostname })],
+      children: [
+        textColumn,
+        buildThumbnailNode({ thumbnailDataUri, thumbnailWidth, thumbnailHeight, faviconDataUri, hostname }),
+      ],
     },
   };
 }

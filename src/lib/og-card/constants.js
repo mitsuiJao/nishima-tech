@@ -8,11 +8,13 @@ export const PUBLIC_URL_PREFIX = '/og-card';
 export const META_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
 
 // Bump when the visual template changes, to force regeneration of all cards.
-export const TEMPLATE_VERSION = 2;
+export const TEMPLATE_VERSION = 3;
 
 export const CARD_WIDTH = 900;
 export const CARD_HEIGHT = 140;
 export const THUMB_WIDTH = 200;
+export const THUMB_MIN_WIDTH = 120;
+export const THUMB_MAX_WIDTH = 320;
 
 export const CRAWLER_USER_AGENT =
   'Mozilla/5.0 (compatible; nishima-tech-og-card/1.0; +https://nishima-tech.com; link-preview)';

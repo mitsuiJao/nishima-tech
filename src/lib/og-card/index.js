@@ -3,6 +3,7 @@ import path from 'node:path';
 import { visitParents } from 'unist-util-visit-parents';
 import { isElement } from 'hast-util-is-element';
 import { h } from 'hastscript';
+import { imageMetadata } from 'astro/assets/utils';
 import { getOGData, downloadImageBuffer, googleFaviconFallbackUrl } from './network.js';
 import { loadFonts, buildCardTree, renderCardPng } from './render.js';
 import { sha256, ensureDirSync, fileExistsSync, readJsonCache, writeJsonCache } from './cache.js';
@@ -58,6 +59,22 @@ async function toDataUri(url, options) {
   return `data:${downloaded.mimeType};base64,${downloaded.buffer.toString('base64')}`;
 }
 
+// Reads the thumbnail's real width/height so buildThumbnailNode can size it
+// to the photo's actual aspect ratio instead of always cropping to a fixed box.
+async function resolveThumbnail(ogImageURL) {
+  if (!ogImageURL) return null;
+  const downloaded = await downloadImageBuffer(ogImageURL);
+  if (!downloaded) return null;
+  const dataUri = `data:${downloaded.mimeType};base64,${downloaded.buffer.toString('base64')}`;
+  try {
+    const { width, height } = await imageMetadata(downloaded.buffer, ogImageURL);
+    return { dataUri, width, height };
+  } catch (error) {
+    console.error('[og-card] Failed to read thumbnail dimensions', ogImageURL, error);
+    return { dataUri, width: undefined, height: undefined };
+  }
+}
+
 const FAVICON_DOWNLOAD_OPTIONS = { allowSvg: true, maxBytes: 1024 * 1024 };
 
 // Many sites only publish a `.ico` favicon, which resvg can't rasterize (see
@@ -94,11 +111,19 @@ async function getOrRenderCardPng(ogData) {
   if (!fonts) return null;
 
   try {
-    const [thumbnailDataUri, faviconDataUri] = await Promise.all([
-      ogImageURL ? toDataUri(ogImageURL) : null,
+    const [thumbnail, faviconDataUri] = await Promise.all([
+      resolveThumbnail(ogImageURL),
       resolveFaviconDataUri(faviconURL, hostname),
     ]);
-    const tree = buildCardTree({ title, description, hostname, thumbnailDataUri, faviconDataUri });
+    const tree = buildCardTree({
+      title,
+      description,
+      hostname,
+      thumbnailDataUri: thumbnail?.dataUri ?? null,
+      thumbnailWidth: thumbnail?.width,
+      thumbnailHeight: thumbnail?.height,
+      faviconDataUri,
+    });
     const png = await renderCardPng(tree, fonts);
     ensureDirSync(OUTPUT_DIR);
     await fsp.writeFile(pngPath, png);
